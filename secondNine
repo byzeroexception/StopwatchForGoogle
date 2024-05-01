@@ -1,0 +1,64 @@
+package hello;
+
+public class secondNine {
+
+	static void positioningByTime() {
+
+		if (StopwatchUI.second > 9) {
+
+			StopwatchUI.ss.setBounds(15, 6, 50, 50);
+
+			StopwatchUI.s.setBounds(44, 8, 50, 50);
+
+			StopwatchUI.ms.setBounds(60, 11, 50, 50);
+
+		}
+		if (StopwatchUI.minute >= 1) {
+
+			StopwatchUI.mm.setBounds(15, 6, 50, 50);
+
+			StopwatchUI.m.setBounds(29, 8, 50, 50);
+
+			StopwatchUI.ss.setBounds(50, 6, 50, 50);
+
+			StopwatchUI.s.setBounds(79, 8, 50, 50);
+
+			StopwatchUI.ms.setBounds(93, 11, 50, 50);
+
+		}
+		if (StopwatchUI.minute >= 10) {
+
+			StopwatchUI.mm.setBounds(15, 6, 50, 50);
+
+			StopwatchUI.m.setBounds(44, 8, 50, 50);
+
+			StopwatchUI.ss.setBounds(65, 6, 50, 50);
+
+			StopwatchUI.s.setBounds(94, 8, 50, 50);
+
+			StopwatchUI.ms.setBounds(108, 11, 50, 50);
+
+		}
+		if (StopwatchUI.minute == 59 && StopwatchUI.second == 59 && StopwatchUI.millisecond == 59) {
+			StopwatchUI.timer.cancel();
+		}
+//		if(StopwatchUI.minute >= 59) {
+//			
+//			StopwatchUI.hh.setBounds(15, 6, 50, 50);
+//			
+//			StopwatchUI.h.setBounds(44,8,50,50);
+//			
+//			StopwatchUI.mm.setBounds(65,6,50,50);
+//			
+//			StopwatchUI.m.setBounds(94,8,50,50);
+//			
+//			StopwatchUI.ss.setBounds(144,8,50,50);
+//			
+//			StopwatchUI.s.setBounds(173,8,50,50);
+//			
+//			StopwatchUI.ms.setBounds(187,11,50,50);
+//		}
+
+	}
+
+}
