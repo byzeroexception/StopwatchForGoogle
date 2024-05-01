@@ -1,0 +1,358 @@
+package hello;
+
+import java.awt.Color;
+
+import java.awt.Dimension;
+
+import java.awt.Font;
+
+import java.awt.Toolkit;
+
+import java.awt.event.ActionEvent;
+
+import java.awt.event.ActionListener;
+
+import java.util.Timer;
+
+import java.util.TimerTask;
+
+import javax.swing.BorderFactory;
+
+import javax.swing.JButton;
+
+import javax.swing.JFrame;
+
+import javax.swing.JLabel;
+
+import javax.swing.JPanel;
+import javax.swing.text.DefaultStyledDocument;
+
+public class StopwatchUI {
+
+	public static JFrame frame = new JFrame();
+
+	public static JPanel panel = new JPanel();
+
+	public static JPanel stopwatchPanel = new JPanel();
+
+	public static JPanel buttonPanel = new JPanel();
+
+	public static JButton Start = new JButton();
+
+	public static JButton Stop = new JButton();
+
+	public static JButton Reset = new JButton();
+
+	public static JLabel hh = new JLabel();
+
+	public static JLabel mm = new JLabel();
+
+	public static JLabel ss = new JLabel();
+
+	public static JLabel ms = new JLabel();
+
+	public static JLabel h = new JLabel();
+
+	public static JLabel m = new JLabel();
+
+	public static JLabel s = new JLabel();
+
+	public static int hours = 0, minute = 0, second = 0, millisecond = 0;
+
+	public static Timer timer = new Timer();
+
+	static void frameaddSetting() {
+
+		frame.setTitle("Stopwatch");
+
+		frame.setSize(400, 150);
+
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+
+		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+
+		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+
+		frame.setLocation(x, y);
+
+		frame.getContentPane().setBackground(Color.white);
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		frame.setResizable(false);
+
+		frame.setLayout(null);
+
+		frame.setVisible(true);
+
+		panel.setBackground(Color.white);
+
+		panel.setBounds(0, 0, 385, 115);
+
+		panel.setLayout(null);
+
+		frame.add(panel);
+
+		panel.add(stopwatchPanel);
+
+		panel.add(buttonPanel);
+
+		stopwatchPanel.setBackground(Color.white);
+
+		stopwatchPanel.setBounds(10, 10, 365, 60);
+
+		stopwatchPanel.setLayout(null);
+
+		buttonPanel.setBackground(Color.white);
+
+		buttonPanel.setBounds(10, 75, 365, 35);
+
+		buttonPanel.setLayout(null);
+
+		stopwatchPanel.add(hh);
+
+		stopwatchPanel.add(mm);
+
+		stopwatchPanel.add(ss);
+
+		stopwatchPanel.add(ms);
+
+		stopwatchPanel.add(h);
+
+		stopwatchPanel.add(m);
+
+		stopwatchPanel.add(s);
+
+		buttonPanel.add(Start);
+
+		buttonPanel.add(Stop);
+
+		buttonPanel.add(Reset);
+
+	}
+
+	static void stopwatchButtonSet() {
+
+		Start.setText("Start");
+
+		Start.setBackground(Color.blue);
+
+		Start.setForeground(Color.white);
+
+		Start.setBounds(10, 6, 60, 25);
+
+		Start.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+
+		Reset.setText("Reset");
+
+		Reset.setBackground(Color.white);
+
+		Reset.setForeground(Color.blue);
+
+		Reset.setBounds(75, 6, 60, 25);
+
+		Reset.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+
+		Stop.setText("Stop");
+
+		Stop.setBackground(Color.blue);
+
+		Stop.setForeground(Color.white);
+
+		Stop.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+
+	}
+
+	static void stopwatch() {
+
+		hh.setText("0");
+
+		hh.setForeground(Color.black);
+
+		hh.setFont(new Font("", Font.PLAIN, 25));
+
+		h.setText("h");
+
+		h.setForeground(Color.black);
+
+		h.setFont(new Font("", Font.PLAIN, 20));
+
+		mm.setText("0");
+
+		mm.setForeground(Color.black);
+
+		mm.setFont(new Font("", Font.PLAIN, 25));
+
+		m.setText("m");
+
+		m.setForeground(Color.black);
+
+		m.setFont(new Font("", Font.PLAIN, 20));
+
+		ss.setText("0");
+
+		ss.setForeground(Color.black);
+
+		ss.setFont(new Font("", Font.PLAIN, 25));
+
+		ss.setBounds(10, 6, 50, 50);
+
+		s.setText("s");
+
+		s.setForeground(Color.black);
+
+		s.setFont(new Font("", Font.PLAIN, 20));
+
+		s.setBounds(24, 8, 50, 50);
+
+		ms.setText("00");
+
+		ms.setForeground(Color.black);
+
+		ms.setFont(new Font("", Font.PLAIN, 12));
+		ms.setBounds(40, 11, 50, 50);
+
+	}
+
+	static void stopwatchButAciton() {
+
+		Start.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				Stop.setBounds(10, 6, 60, 25);
+
+				Start.setBounds(0, 0, 0, 0);
+
+				runStopwatch();
+
+			}
+
+		});
+
+		Stop.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e1) {
+
+				Start.setBounds(10, 6, 60, 25);
+
+				Stop.setBounds(0, 0, 0, 0);
+
+				Start.setText("Start");
+
+				System.out.println(hh.getText() + ":" + mm.getText() + ":" + ss.getText() + ":" + ms.getText());
+
+				if (timer != null) {
+
+					timer.cancel();
+
+				}
+
+			}
+
+		});
+
+		Reset.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e2) {
+
+				// reset
+
+				millisecond = 0;
+
+				minute = 0;
+
+				second = 0;
+
+				millisecond = 0;
+
+				// reset
+				ss.setBounds(10, 6, 50, 50);
+				s.setBounds(24, 8, 50, 50);
+				ms.setBounds(40, 11, 50, 50);
+
+				ss.setText("0");
+				ms.setText("00");
+
+				// parts have been repositioned(reset)
+				m.setBounds(0, 0, 0, 0);
+				mm.setBounds(0, 0, 0, 0);
+
+				timer.cancel();
+
+				// The button is repositioned(reset)
+				Stop.setBounds(0, 0, 0, 0);
+				Start.setBounds(10, 6, 60, 25);
+			}
+
+		});
+
+	}
+
+	static void updateLabel() {
+
+		hh.setText(String.valueOf(hours));
+
+		mm.setText(String.valueOf(minute));
+
+		ss.setText(String.valueOf(second));
+
+		secondNine.positioningByTime();
+
+		addZero.addingzerosByTime();
+
+		ms.setText(String.valueOf(millisecond));
+
+	}
+
+	static void runStopwatch() {
+
+		TimerTask gorev = new TimerTask() {
+
+			public void run() {
+
+				millisecond += 1;
+
+				if (millisecond == 100) {
+
+					millisecond = 0;
+
+					second += 1;
+
+					if (second == 60) {
+
+						second = 0;
+
+						minute += 1;
+
+						if (minute == 60) {
+
+							minute = 0;
+
+							hours += 1;
+
+						}
+
+					}
+
+				}
+
+				updateLabel();
+
+			}
+
+		};
+
+		if (timer != null) {
+
+			timer.cancel();
+
+		}
+
+		timer = new Timer(); 
+
+		timer.schedule(gorev, 0, 9);
+
+	}
+
+}
