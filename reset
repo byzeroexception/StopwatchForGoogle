@@ -1,0 +1,23 @@
+package hello;
+public class reset {
+	
+	static void reset() {
+		StopwatchUI.millisecond = 0;
+
+		StopwatchUI.minute = 0;
+
+		StopwatchUI.second = 0;
+
+		StopwatchUI.millisecond = 0;
+
+		// positioning
+		StopwatchUI.ss.setBounds(10, 6, 50, 50);
+		StopwatchUI.s.setBounds(24, 8, 50, 50);
+		StopwatchUI.ms.setBounds(40, 11, 50, 50);
+		
+//		StopwatchUI.Start.setText("Restart");
+		
+		
+	}
+	
+}
