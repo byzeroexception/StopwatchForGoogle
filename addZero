@@ -1,0 +1,14 @@
+package hello;
+
+public class addZero {
+	static void addingzerosByTime() {
+		if (StopwatchUI.minute !=0) {
+
+			StopwatchUI.ss.setText(String.format("%02d", StopwatchUI.second));
+
+		}
+
+	
+
+	}
+}
